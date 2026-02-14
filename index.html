@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Sahra 🎉</title>
+  <style>
+    body{
+      margin:0; font-family: Arial, sans-serif; color:#fff;
+      min-height:100vh; display:flex; align-items:center; justify-content:center;
+      background: radial-gradient(circle at top, #ff6aa2, #5b2cff, #0b1020);
+      text-align:center; padding:24px;
+    }
+    .card{
+      max-width:720px; width:100%;
+      background: rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.2);
+      border-radius:24px;
+      padding:28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      backdrop-filter: blur(10px);
+    }
+    h1{ font-size:42px; margin:0 0 10px; }
+    h2{ font-weight:400; margin:0 0 18px; opacity:0.95; }
+    p{ font-size:18px; line-height:1.6; margin:14px 0; }
+    .btns{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px; }
+    button{
+      border:0; cursor:pointer; padding:12px 16px; border-radius:14px;
+      font-size:16px; font-weight:600;
+    }
+    .primary{ background:#fff; color:#111; }
+    .ghost{ background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.35); }
+    .small{ font-size:13px; opacity:0.85; margin-top:16px; }
+    .hearts{
+      position:fixed; inset:0; pointer-events:none; overflow:hidden;
+    }
+    .heart{
+      position:absolute; bottom:-40px; font-size:20px; opacity:0.9;
+      animation: floatUp linear forwards;
+      filter: drop-shadow(0 8px 12px rgba(0,0,0,0.25));
+    }
+    @keyframes floatUp{
+      to{ transform: translateY(-110vh) rotate(20deg); opacity:0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <main class="card">
+    <h1>Happy Birthday, Sahra 🎂💖</h1>
+    <h2>From your husband — with all my love</h2>
+
+    <p>
+      Sahra, you are my happiness, my peace, and my best friend.
+      I’m so grateful for you every single day.
+    </p>
+    <p>
+      May your new year be full of health, joy, success, and beautiful moments.
+      I love you so much ❤️
+    </p>
+
+    <div class="btns">
+      <button class="primary" onclick="playSong()">Play a birthday vibe 🎶</button>
+      <button class="ghost" onclick="makeHearts()">Send hearts 💕</button>
+      <button class="ghost" onclick="copyLink()">Copy this page link 🔗</button>
+    </div>
+
+    <div class="small" id="status">Tip: After you publish, open the link and send it to Sahra.</div>
+
+    <!-- Optional: add your own music file link by replacing src below -->
+    <audio id="audio" preload="auto">
+      <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_2e6a2b5c48.mp3?filename=happy-birthday-to-you-piano-version-10777.mp3" type="audio/mpeg">
+    </audio>
+  </main>
+
+  <script>
+    const statusEl = document.getElementById("status");
+    const heartsEl = document.getElementById("hearts");
+    const audio = document.getElementById("audio");
+
+    function playSong(){
+      audio.play().then(()=> {
+        statusEl.textContent = "Playing 🎶 Happy Birthday Sahra!";
+      }).catch(()=>{
+        statusEl.textContent = "Tap again (some browsers require a second click).";
+      });
+      makeHearts();
+    }
+
+    function makeHearts(){
+      const emojis = ["💖","💕","💗","💘","💝","❤️","🎉","✨","🎂"];
+      for(let i=0;i<18;i++){
+        const span = document.createElement("span");
+        span.className = "heart";
+        span.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        span.style.left = Math.random()*100 + "vw";
+        span.style.animationDuration = (3 + Math.random()*3) + "s";
+        span.style.fontSize = (16 + Math.random()*18) + "px";
+        heartsEl.appendChild(span);
+        setTimeout(()=> span.remove(), 7000);
+      }
+      statusEl.textContent = "Hearts sent to Sahra 💕";
+    }
+
+    function copyLink(){
+      navigator.clipboard.writeText(window.location.href).then(()=>{
+        statusEl.textContent = "Link copied! Send it to Sahra 🔗";
+      }).catch(()=>{
+        statusEl.textContent = "Couldn’t copy automatically—just copy the URL from the address bar.";
+      });
+    }
+  </script>
+</body>
+</html>
